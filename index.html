@@ -1,0 +1,1126 @@
+        }<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ResponseLogic™ - Professional Communication Management System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 11px;
+            background: #e8eaf0;
+            color: #333;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(to bottom, #4a6fa5 0%, #2e4e7e 100%);
+            border-bottom: 1px solid #1e3a5f;
+            padding: 8px 12px;
+            color: white;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+
+        .logo {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .user-info {
+            font-size: 10px;
+        }
+
+        .nav-bar {
+            background: linear-gradient(to bottom, #f8f8f8 0%, #e0e0e0 100%);
+            border-bottom: 1px solid #a0a0a0;
+            padding: 0;
+        }
+
+        .nav-tab {
+            display: inline-block;
+            padding: 5px 12px;
+            background: linear-gradient(to bottom, #fafafa 0%, #e0e0e0 100%);
+            border: 1px solid #c0c0c0;
+            border-bottom: none;
+            margin-right: 2px;
+            color: #333;
+            text-decoration: none;
+            font-size: 11px;
+            cursor: pointer;
+        }
+
+        .nav-tab.active {
+            background: white;
+            padding-bottom: 6px;
+            font-weight: bold;
+        }
+
+        .nav-tab.disabled {
+            color: #999;
+            cursor: default;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 980px;
+            margin: 20px auto;
+            background: white;
+            border: 1px solid #c0c0c0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .content-header {
+            background: linear-gradient(to bottom, #f5f5f5 0%, #e5e5e5 100%);
+            border-bottom: 1px solid #c0c0c0;
+            padding: 10px 15px;
+        }
+
+        .content-title {
+            font-size: 13px;
+            font-weight: bold;
+            color: #2e4e7e;
+        }
+
+        .content-subtitle {
+            font-size: 10px;
+            color: #666;
+            margin-top: 2px;
+        }
+
+        /* Form Section */
+        .form-section {
+            padding: 15px;
+            background: #f9f9f9;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .form-row {
+            margin-bottom: 12px;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 4px;
+            color: #333;
+            font-size: 11px;
+        }
+
+        .required {
+            color: #cc0000;
+        }
+
+        .form-select {
+            width: 400px;
+            padding: 4px;
+            font-size: 11px;
+            border: 1px solid #a0a0a0;
+            background: white;
+        }
+
+        .form-help {
+            font-size: 10px;
+            color: #666;
+            margin-top: 2px;
+        }
+
+        .button-row {
+            margin-top: 15px;
+            padding-top: 10px;
+            border-top: 1px dotted #c0c0c0;
+        }
+
+        .btn {
+            padding: 5px 15px;
+            font-size: 11px;
+            border: 1px solid #a0a0a0;
+            background: linear-gradient(to bottom, #f8f8f8 0%, #d8d8d8 100%);
+            color: #333;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+
+        .btn:hover {
+            background: linear-gradient(to bottom, #ffffff 0%, #e0e0e0 100%);
+        }
+
+        .btn-primary {
+            background: linear-gradient(to bottom, #4a6fa5 0%, #2e4e7e 100%);
+            color: white;
+            border-color: #1e3a5f;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(to bottom, #5a7fb5 0%, #3e5e8e 100%);
+        }
+
+        .btn:disabled {
+            background: #e0e0e0;
+            color: #999;
+            cursor: default;
+        }
+
+        /* Results Section */
+        .results-section {
+            display: none;
+            padding: 15px;
+        }
+
+        .results-section.active {
+            display: block;
+        }
+
+        .results-header {
+            background: #f0f0f0;
+            border: 1px solid #d0d0d0;
+            padding: 8px 10px;
+            margin-bottom: 10px;
+        }
+
+        .results-title {
+            font-weight: bold;
+            font-size: 11px;
+        }
+
+        .results-info {
+            float: right;
+            font-size: 10px;
+            color: #666;
+        }
+
+        /* Table */
+        .data-table {
+            width: 100%;
+            border: 1px solid #c0c0c0;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+            font-size: 11px;
+        }
+
+        .data-table th {
+            background: linear-gradient(to bottom, #f5f5f5 0%, #e0e0e0 100%);
+            border: 1px solid #c0c0c0;
+            padding: 5px 8px;
+            text-align: left;
+            font-weight: bold;
+            font-size: 10px;
+            color: #333;
+        }
+
+        .data-table td {
+            border: 1px solid #d0d0d0;
+            padding: 6px 8px;
+            background: white;
+        }
+
+        .data-table tr:hover td {
+            background: #f5f8fc;
+        }
+
+        .response-type {
+            font-weight: bold;
+            color: #2e4e7e;
+        }
+
+        .response-text {
+            line-height: 1.4;
+            color: #333;
+        }
+
+        .action-link {
+            color: #2e4e7e;
+            text-decoration: underline;
+            cursor: pointer;
+            font-size: 10px;
+        }
+
+        .action-link:hover {
+            color: #4a6fa5;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 10px 15px;
+            background: #f0f0f0;
+            border-top: 1px solid #c0c0c0;
+            font-size: 10px;
+            color: #666;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .footer a {
+            color: #2e4e7e;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Tools Panel */
+        .tools-panel {
+            background: #f9f9f9;
+            border: 1px solid #d0d0d0;
+            padding: 10px;
+            margin: 15px;
+        }
+
+        .tools-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 11px;
+        }
+
+        .tool-btn {
+            margin-right: 10px;
+            margin-bottom: 5px;
+        }
+
+        /* Status bar */
+        .status-bar {
+            background: linear-gradient(to bottom, #f0f0f0 0%, #e0e0e0 100%);
+            border-top: 1px solid #c0c0c0;
+            padding: 3px 8px;
+            font-size: 10px;
+            color: #666;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+
+        /* Loading */
+        .loading {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            background: url('data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH+GkNyZWF0ZWQgd2l0aCBhamF4bG9hZC5pbmZvACH5BAAKAAAAIf8LTkVUU0NBUEUyLjADAQAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQACgABACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkEAAoAAgAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkEAAoAAwAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkEAAoABAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQACgAFACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQACgAGACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAAKAAcALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==') no-repeat center;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.3);
+            z-index: 1000;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-dialog {
+            background: white;
+            border: 1px solid #666;
+            width: 400px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        .modal-header {
+            background: linear-gradient(to bottom, #4a6fa5 0%, #2e4e7e 100%);
+            color: white;
+            padding: 8px 10px;
+            font-weight: bold;
+            font-size: 11px;
+        }
+
+        .modal-body {
+            padding: 15px;
+            font-size: 11px;
+        }
+
+        .modal-footer {
+            padding: 10px;
+            background: #f0f0f0;
+            border-top: 1px solid #c0c0c0;
+            text-align: right;
+        }
+
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            body {
+                font-size: 12px;
+            }
+
+            .header-top {
+                flex-direction: column;
+                gap: 5px;
+                text-align: center;
+            }
+
+            .user-info {
+                font-size: 9px;
+            }
+
+            .nav-bar {
+                overflow-x: auto;
+                white-space: nowrap;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .container {
+                margin: 10px;
+            }
+
+            .form-select {
+                width: 100%;
+                font-size: 14px;
+                padding: 8px;
+            }
+
+            .btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+
+            .button-row {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 5px;
+            }
+
+            .button-row .btn {
+                flex: 1;
+                min-width: 45%;
+            }
+
+            .data-table {
+                font-size: 11px;
+            }
+
+            .data-table th,
+            .data-table td {
+                padding: 8px 5px;
+            }
+
+            .data-table th:first-child {
+                width: 80px;
+            }
+
+            .response-text {
+                font-size: 12px;
+                line-height: 1.5;
+            }
+
+            .tools-panel {
+                margin: 10px;
+            }
+
+            .tool-btn {
+                display: block;
+                width: 100%;
+                margin-bottom: 8px;
+            }
+
+            .footer {
+                flex-direction: column;
+                text-align: center;
+                gap: 5px;
+                padding: 15px 10px 60px 10px;
+            }
+
+            .status-bar {
+                font-size: 9px;
+            }
+
+            .modal-dialog {
+                width: 90%;
+                margin: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 12px;
+            }
+
+            .nav-tab {
+                font-size: 10px;
+                padding: 4px 8px;
+            }
+
+            .content-title {
+                font-size: 12px;
+            }
+
+            .btn-primary {
+                width: 100%;
+            }
+
+            .data-table {
+                display: block;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="header-top">
+            <div class="logo">ResponseLogic™ Professional Communication Suite</div>
+            <div class="user-info">
+                Welcome, user@label.com | Last Login: Today 09:43 AM | <a href="#" style="color: white;">Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav-bar">
+        <span class="nav-tab active">Response Generator</span>
+        <span class="nav-tab disabled">Templates</span>
+        <span class="nav-tab disabled">History</span>
+        <span class="nav-tab disabled">Reports</span>
+        <span class="nav-tab disabled">Settings</span>
+        <span class="nav-tab disabled">Admin</span>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <div class="content-header">
+            <div class="content-title">Professional Response Generator</div>
+            <div class="content-subtitle">Generate appropriate responses for business communications</div>
+        </div>
+
+        <!-- Form Section -->
+        <div class="form-section">
+            <div class="form-row">
+                <label class="form-label">Response Category <span class="required">*</span></label>
+                <select class="form-select" id="scenario">
+                    <option value="">-- Select Category --</option>
+                    <option value="payment">Payment Inquiries</option>
+                    <option value="contract">Contract Negotiations</option>
+                    <option value="rejection">Content Decisions</option>
+                    <option value="marketing">Marketing Budget Requests</option>
+                    <option value="tour">Tour Support Applications</option>
+                    <option value="meeting">Meeting Rescheduling</option>
+                    <option value="response">Delayed Communications</option>
+                    <option value="rights">Rights Management</option>
+                    <option value="advance">Advance Requests</option>
+                </select>
+                <div class="form-help">Select the appropriate category for your response needs</div>
+            </div>
+
+            <div class="button-row">
+                <button class="btn btn-primary" id="generateBtn">Generate Responses</button>
+                <button class="btn" onclick="clearForm()">Clear</button>
+                <button class="btn" disabled>Save as Template</button>
+                <button class="btn" disabled>Export to Excel</button>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div class="results-section" id="results">
+            <div class="results-header">
+                <span class="results-title">Generated Responses</span>
+                <span class="results-info">Generated at: <span id="timestamp"></span></span>
+                <div style="clear: both;"></div>
+            </div>
+
+            <table class="data-table" id="resultsTable">
+                <thead>
+                    <tr>
+                        <th width="120">Response Type</th>
+                        <th>Generated Text</th>
+                        <th width="80">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="resultsBody">
+                </tbody>
+            </table>
+
+            <div class="button-row">
+                <button class="btn" onclick="copyAll()">Copy All Responses</button>
+                <button class="btn" disabled>Save to Database</button>
+                <button class="btn" disabled>Print Preview</button>
+                <button class="btn" onclick="generateNewSet()">Generate New Set</button>
+            </div>
+        </div>
+
+        <!-- Tools Panel -->
+        <div class="tools-panel">
+            <div class="tools-title">Additional Tools</div>
+            <button class="btn tool-btn" onclick="showCCModal()">CC Recipients Manager</button>
+            <button class="btn tool-btn" onclick="addComplexity()">Add Technical Language</button>
+            <button class="btn tool-btn" disabled>Spell Check</button>
+            <button class="btn tool-btn" disabled>Translation Services</button>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div>
+                ResponseLogic™ v3.2.1 | © 2011-2019 ResponseLogic Solutions Inc. | 
+                <a href="#">Help</a> | 
+                <a href="#">User Manual</a> | 
+                <a href="#">Contact Support</a>
+            </div>
+            <div>
+                Best viewed in Internet Explorer 9+
+            </div>
+        </div>
+    </div>
+
+    <!-- CC Modal -->
+    <div class="modal" id="ccModal">
+        <div class="modal-dialog">
+            <div class="modal-header">CC Recipients Manager</div>
+            <div class="modal-body" id="modalBody">
+                <p><strong>Warning:</strong> You are about to CC the following recipients:</p>
+                <div style="background: #f0f0f0; border: 1px solid #c0c0c0; padding: 8px; margin: 10px 0; font-size: 10px;">
+                    Legal Department, Finance Team, Business Affairs, A&R Division, Marketing Department, 
+                    Distribution Team, Your Manager, Their Manager, Senior VP, Junior VP, The Intern, 
+                    Reception, That Guy From The Christmas Party, Someone Named Derek
+                </div>
+                <p>Total recipients: 14</p>
+                <p>Are you sure you want to include all recipients?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" onclick="closeModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="confirmCC()">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Status Bar -->
+    <div class="status-bar">
+        Ready | Database: Connected | Server Status: Online | Session Timeout: 58:23
+    </div>
+
+    <script>
+        // Expanded Excuse Database with 10+ variations per type
+        const responseDatabase = {
+            payment: {
+                'Professional Deflection': [
+                    "Actually, the finance team is currently reviewing all pending payments as part of their quarterly audit process.",
+                    "Actually, our accounting system is being upgraded and payments are temporarily paused until the migration is complete.",
+                    "Actually, we're waiting for clearance from our international banking partners before we can process this payment.",
+                    "Actually, the CFO has implemented new approval workflows that are causing some delays.",
+                    "Actually, our payment processing vendor is experiencing technical difficulties.",
+                    "Actually, we need updated tax forms before we can release any funds.",
+                    "Actually, the board has requested a review of all outgoing payments above a certain threshold.",
+                    "Actually, we're synchronizing our payment systems with our new parent company's processes.",
+                    "Actually, there's a hold on all payments while we investigate a potential security breach.",
+                    "Actually, our accounts payable department is undergoing restructuring.",
+                    "Actually, we're waiting for the quarterly financial report before processing payments."
+                ],
+                'Direct Communication': [
+                    "Actually, as we've mentioned in our previous three emails, payments are processed on a strict 120-day cycle.",
+                    "Actually, I'm surprised you're asking about this again when we clearly outlined the payment timeline in section 14.3 of your contract.",
+                    "Actually, per our last conversation, all payment inquiries need to go through the proper channels, not directly to me.",
+                    "Actually, if you had submitted the correct paperwork initially, we wouldn't be having this delay.",
+                    "Actually, most of our artists understand that payment delays are standard in this industry.",
+                    "Actually, we find it odd that you're following up so aggressively on standard payment timelines.",
+                    "Actually, checking in daily won't make the payment process any faster.",
+                    "Actually, your tone suggests you don't understand how professional payment systems work.",
+                    "Actually, we've already explained this process to you multiple times.",
+                    "Actually, perhaps you should have your manager handle these inquiries.",
+                    "Actually, this constant follow-up is becoming counterproductive."
+                ],
+                'Apologetic Response': [
+                    "Actually, we're absolutely devastated about the delay and it's keeping our team up at night, but our hands are completely tied by corporate policy.",
+                    "Actually, this pains us more than you could possibly know, and we wish there was something—anything—we could do to expedite this.",
+                    "Actually, we're mortified by this situation and the entire team feels terrible, but the payment system is completely out of our control.",
+                    "Actually, we feel sick about making you wait and we know how this affects your livelihood.",
+                    "Actually, this is heartbreaking for us because we value you so much as an artist.",
+                    "Actually, we're losing sleep over this delay and desperately trying to find a solution.",
+                    "Actually, the guilt is eating us alive but the bureaucracy is beyond our control.",
+                    "Actually, we're so embarrassed and wish we could personally write you a check.",
+                    "Actually, this situation is devastating and we feel like we're failing you.",
+                    "Actually, we're crushed by these circumstances and hate being the bearer of bad news.",
+                    "Actually, this makes us question everything about how we do business, but we're powerless."
+                ]
+            },
+            contract: {
+                'Professional Deflection': [
+                    "Actually, legal has flagged several clauses that need executive review before we can proceed.",
+                    "Actually, business affairs is restructuring all talent agreements to align with new industry standards.",
+                    "Actually, our compliance department needs to verify this against recent regulatory changes.",
+                    "Actually, we're updating our standard contracts to reflect new market conditions.",
+                    "Actually, the board wants to review all contracts over a certain value.",
+                    "Actually, our insurance provider requires additional language in all new agreements.",
+                    "Actually, we're harmonizing our contracts across all territories.",
+                    "Actually, there's a moratorium on new contracts until the new fiscal year.",
+                    "Actually, our legal team is backed up with a major acquisition.",
+                    "Actually, we need to run this through our new risk assessment protocol.",
+                    "Actually, the contract requires approval from our parent company's legal team."
+                ],
+                'Direct Communication': [
+                    "Actually, if you had reviewed the redlines we sent six weeks ago, we wouldn't be having this conversation.",
+                    "Actually, we find it interesting that these concerns are only being raised now, after months of negotiation.",
+                    "Actually, as clearly stated in our correspondence from January, all contract modifications require board approval.",
+                    "Actually, your lawyer seems to be intentionally delaying this process.",
+                    "Actually, these are standard terms that all our artists have agreed to.",
+                    "Actually, we're not sure why you're pushing back on industry-standard language.",
+                    "Actually, this level of negotiation is unusual for an artist at your level.",
+                    "Actually, we've already made more concessions than we typically would.",
+                    "Actually, perhaps you need different representation if this is confusing.",
+                    "Actually, we're starting to question whether this partnership makes sense.",
+                    "Actually, most artists are grateful for the terms we're offering."
+                ],
+                'Apologetic Response': [
+                    "Actually, we're heartbroken that this is taking so long and we know how frustrating this must be for you.",
+                    "Actually, we feel absolutely awful about the delays and wish we could just sign this today, but our hands are tied.",
+                    "Actually, this is crushing for us too—we were so excited to work together but these bureaucratic hurdles are killing us.",
+                    "Actually, we're devastated that legal red tape is standing in the way of our creative partnership.",
+                    "Actually, this process is soul-crushing and we hate putting you through it.",
+                    "Actually, we're so sorry for this nightmare of negotiations and paperwork.",
+                    "Actually, we feel terrible that corporate bureaucracy is ruining what should be a celebration.",
+                    "Actually, this is agonizing for everyone involved and we're truly sorry.",
+                    "Actually, we're mortified by how long this is taking and the stress it's causing.",
+                    "Actually, our hearts are breaking watching this deal get bogged down in details.",
+                    "Actually, we're devastated that we can't just shake hands and move forward."
+                ]
+            },
+            rejection: {
+                'Professional Deflection': [
+                    "Actually, the A&R committee has decided to focus on different genres for this quarter's releases.",
+                    "Actually, market research indicates we need to pivot our creative direction for the upcoming cycle.",
+                    "Actually, our programming team has already filled the release schedule through Q4.",
+                    "Actually, we're consolidating our roster to focus on core artists.",
+                    "Actually, the label is moving in a different strategic direction.",
+                    "Actually, our distribution partners are requesting a different sound.",
+                    "Actually, we need to prioritize albums that align with our sync opportunities.",
+                    "Actually, the international team has concerns about marketability in key territories.",
+                    "Actually, we're pausing all new releases while we restructure.",
+                    "Actually, our data shows this genre isn't performing well currently.",
+                    "Actually, we need to focus on artists with stronger streaming metrics."
+                ],
+                'Direct Communication': [
+                    "Actually, we thought it was clear from our last meeting that this direction wasn't aligned with our vision.",
+                    "Actually, the quality just isn't at the level we expected based on your previous work.",
+                    "Actually, we're confused why you submitted this when we specifically asked for something completely different.",
+                    "Actually, this feels like a step backward creatively.",
+                    "Actually, we're not hearing the hit we need.",
+                    "Actually, this doesn't meet our commercial standards.",
+                    "Actually, the songs aren't strong enough for us to invest in.",
+                    "Actually, we expected much more from you at this point in your career.",
+                    "Actually, this sounds dated and not in a good way.",
+                    "Actually, we can't find a single track that works for radio.",
+                    "Actually, this isn't what we signed you for."
+                ],
+                'Apologetic Response': [
+                    "Actually, this breaks our hearts because we absolutely love you as an artist, but we just can't move forward right now.",
+                    "Actually, we're devastated to say this because your talent is undeniable, but the timing just isn't right.",
+                    "Actually, this is the hardest email we've had to write because we believe in you so much, but we have to pass.",
+                    "Actually, we're crying as we write this because we wanted this to work so badly.",
+                    "Actually, this decision is tearing us apart but we have no choice.",
+                    "Actually, we feel like we're betraying you and it's destroying us.",
+                    "Actually, we're sick to our stomachs having to deliver this news.",
+                    "Actually, this feels like breaking up with someone we love.",
+                    "Actually, we're devastated and questioning everything about this business.",
+                    "Actually, our hearts are shattered but the market realities are brutal.",
+                    "Actually, we hate ourselves for having to say no to something so beautiful."
+                ]
+            },
+            marketing: {
+                'Professional Deflection': [
+                    "Actually, the marketing budget has been reallocated to priority releases for this quarter.",
+                    "Actually, our digital strategy team is exploring more organic growth methods that don't require traditional spend.",
+                    "Actually, corporate has frozen all marketing expenditures pending a comprehensive ROI analysis.",
+                    "Actually, we're shifting to influencer partnerships instead of paid advertising.",
+                    "Actually, the marketing department is being restructured.",
+                    "Actually, we're waiting for the new CMO to set the strategy.",
+                    "Actually, our agency relationships are under review.",
+                    "Actually, we're focusing on earned media rather than paid campaigns.",
+                    "Actually, the board wants to see organic traction before approving marketing spend.",
+                    "Actually, we're piloting a new grassroots approach.",
+                    "Actually, marketing budgets won't be approved until next quarter."
+                ],
+                'Direct Communication': [
+                    "Actually, given the performance metrics we're seeing, additional marketing spend wouldn't be prudent.",
+                    "Actually, we've already invested significantly more than comparable projects at this stage.",
+                    "Actually, it's surprising you're requesting more budget when the current campaign hasn't met its KPIs.",
+                    "Actually, throwing money at this won't fix the fundamental problems.",
+                    "Actually, the music needs to connect organically first.",
+                    "Actually, we can't justify spending more when engagement is this low.",
+                    "Actually, maybe focus on making better content instead of asking for more money.",
+                    "Actually, other artists do more with less.",
+                    "Actually, marketing can't save a project that isn't connecting.",
+                    "Actually, you should be grateful for what we've already invested.",
+                    "Actually, this feels like throwing good money after bad."
+                ],
+                'Apologetic Response': [
+                    "Actually, we're sick about this but the marketing budget cuts have affected everyone, not just your project.",
+                    "Actually, this is devastating for us because we know how much potential this has, but our budget is completely depleted.",
+                    "Actually, we're so sorry and we fought hard for more resources, but the company just won't approve additional spend.",
+                    "Actually, this breaks our hearts because we know marketing could make all the difference.",
+                    "Actually, we're crushed that we can't give your art the push it deserves.",
+                    "Actually, we feel like we're failing you and it's eating us alive.",
+                    "Actually, this budget situation is our biggest regret this year.",
+                    "Actually, we're devastated watching your project struggle without proper support.",
+                    "Actually, we cry thinking about what could have been with proper marketing.",
+                    "Actually, this feels like watching potential die and we're powerless to stop it.",
+                    "Actually, we're so sorry for letting budget constraints limit your dreams."
+                ]
+            },
+            tour: {
+                'Professional Deflection': [
+                    "Actually, tour support allocations are being reviewed by the live entertainment division.",
+                    "Actually, we need to see stronger streaming numbers in those markets before committing resources.",
+                    "Actually, our touring partners are restructuring their support programs for emerging artists.",
+                    "Actually, the live department is focusing on festival placements over tour support.",
+                    "Actually, we're waiting for post-pandemic touring patterns to stabilize.",
+                    "Actually, insurance costs have made tour support prohibitively expensive.",
+                    "Actually, we're renegotiating our deals with promoters.",
+                    "Actually, the board wants to see profitable tours before providing support.",
+                    "Actually, we're shifting to 360 deals that handle touring differently.",
+                    "Actually, venue availability is affecting our tour support decisions.",
+                    "Actually, currency fluctuations have impacted our international tour budgets."
+                ],
+                'Direct Communication': [
+                    "Actually, we've already provided more tour support than artists at your level typically receive.",
+                    "Actually, the fact that you're asking for this shows a misunderstanding of current industry standards.",
+                    "Actually, as we discussed extensively, tour support is earned through reaching specific benchmarks.",
+                    "Actually, your last tour lost money so we can't justify more investment.",
+                    "Actually, you need to prove you can draw crowds before we invest.",
+                    "Actually, tour support is for artists who can sell tickets.",
+                    "Actually, maybe start with smaller venues you can actually fill.",
+                    "Actually, we're not confident you can deliver ROI on tour investment.",
+                    "Actually, other artists tour without support and make it work.",
+                    "Actually, if you can't tour profitably, maybe touring isn't for you.",
+                    "Actually, we've explained multiple times why you don't qualify for tour support."
+                ],
+                'Apologetic Response': [
+                    "Actually, we're heartbroken because we know how important touring is for your growth, but the budget simply isn't there.",
+                    "Actually, this is so painful for us because we want nothing more than to support your tour, but it's impossible right now.",
+                    "Actually, we feel terrible saying no because we believe in your live show, but the financial reality is devastating.",
+                    "Actually, this crushes us because we know touring is your dream.",
+                    "Actually, we're devastated that we can't help you connect with fans live.",
+                    "Actually, denying tour support feels like crushing your spirit and we hate it.",
+                    "Actually, we know this might end your touring dreams and it's killing us.",
+                    "Actually, we're so sorry for making you choose between touring and paying rent.",
+                    "Actually, this feels like we're abandoning you when you need us most.",
+                    "Actually, we're heartbroken watching other artists tour while you can't.",
+                    "Actually, this decision haunts us because we know what touring means to you."
+                ]
+            },
+            meeting: {
+                'Professional Deflection': [
+                    "Actually, our executive team is in back-to-back sessions all week with the board.",
+                    "Actually, we're waiting for key stakeholders to return from the London office before scheduling.",
+                    "Actually, calendar coordination between all necessary parties has proven more complex than anticipated.",
+                    "Actually, we're in the middle of quarterly planning sessions.",
+                    "Actually, the person you need to meet with is traveling for the next three weeks.",
+                    "Actually, we're restructuring departments and need to wait until roles are finalized.",
+                    "Actually, all meetings are on hold during our merger discussions.",
+                    "Actually, we're implementing a new meeting protocol that requires additional approvals.",
+                    "Actually, office renovations have limited our meeting room availability.",
+                    "Actually, we're prioritizing virtual meetings but having technical difficulties.",
+                    "Actually, compliance requires all meetings to be documented and we're updating that system."
+                ],
+                'Direct Communication': [
+                    "Actually, we're not sure what else needs to be discussed that wasn't covered in our last three meetings.",
+                    "Actually, perhaps an email would be more efficient given how these conversations tend to go.",
+                    "Actually, we'd prefer to wait until you have something more concrete to discuss.",
+                    "Actually, these meetings never seem to lead anywhere productive.",
+                    "Actually, we feel like we're having the same conversation over and over.",
+                    "Actually, meeting won't change the fundamental issues we've discussed.",
+                    "Actually, your constant meeting requests are becoming disruptive.",
+                    "Actually, we've said everything that needs to be said.",
+                    "Actually, another meeting won't change our position.",
+                    "Actually, we think you need to accept what we've already told you.",
+                    "Actually, these meeting requests feel like harassment at this point."
+                ],
+                'Apologetic Response': [
+                    "Actually, we feel horrible about rescheduling again and we know how unprofessional this must seem.",
+                    "Actually, we're so embarrassed about the scheduling conflicts and completely understand if you're frustrated.",
+                    "Actually, this is mortifying for us and we promise we want this meeting as much as you do.",
+                    "Actually, we're devastated that we keep failing to connect with you.",
+                    "Actually, this scheduling nightmare is our fault and we're so sorry.",
+                    "Actually, we feel terrible about the mixed signals and constant rescheduling.",
+                    "Actually, we're ashamed of how we're handling this and you deserve better.",
+                    "Actually, this is inexcusable and we're disgusted with ourselves.",
+                    "Actually, we know this looks like we're avoiding you and we're mortified.",
+                    "Actually, the disrespect we're showing with these cancellations is eating us alive.",
+                    "Actually, we're so sorry for wasting your time with our scheduling incompetence."
+                ]
+            },
+            response: {
+                'Professional Deflection': [
+                    "Actually, your message was flagged by our spam filter and we just discovered it.",
+                    "Actually, we needed to gather input from multiple departments before providing a comprehensive response.",
+                    "Actually, this required legal review which has a standard 15-business-day turnaround.",
+                    "Actually, we've been dealing with a company-wide email migration.",
+                    "Actually, your request was forwarded to the appropriate department for handling.",
+                    "Actually, we were waiting for additional information before responding.",
+                    "Actually, company policy requires multiple approvals for this type of response.",
+                    "Actually, we've been in a blackout period due to earnings announcements.",
+                    "Actually, your email arrived during our company retreat.",
+                    "Actually, we needed to consult with external advisors before responding.",
+                    "Actually, system maintenance prevented us from accessing emails."
+                ],
+                'Direct Communication': [
+                    "Actually, we assumed this wasn't urgent since you didn't follow up sooner.",
+                    "Actually, your email was quite long and it's taken time to address all your points properly.",
+                    "Actually, we've been prioritizing matters that were escalated through proper channels.",
+                    "Actually, if this was really important, you would have called.",
+                    "Actually, we receive hundreds of emails and yours wasn't marked as priority.",
+                    "Actually, your tone didn't warrant an immediate response.",
+                    "Actually, we responded in the timeframe outlined in our SLA.",
+                    "Actually, constant emails don't make us respond faster.",
+                    "Actually, we were hoping you'd figure it out on your own.",
+                    "Actually, your email didn't seem to require a response.",
+                    "Actually, we've been busy with actual priorities."
+                ],
+                'Apologetic Response': [
+                    "Actually, we're mortified about this delay and there's absolutely no excuse for our lack of response.",
+                    "Actually, we feel terrible that you've been waiting and we're so embarrassed by our communication failure.",
+                    "Actually, this is completely unacceptable on our part and we're deeply sorry for leaving you hanging.",
+                    "Actually, we're disgusted with ourselves for dropping the ball on this.",
+                    "Actually, this delay is inexcusable and we're ashamed.",
+                    "Actually, we've failed you and we're sick about it.",
+                    "Actually, the anxiety you must have felt waiting for our response is our fault.",
+                    "Actually, we're horrified that we left you in limbo.",
+                    "Actually, this radio silence was disrespectful and we're so sorry.",
+                    "Actually, we hate ourselves for making you chase us for a response.",
+                    "Actually, we're crushed by our failure to communicate promptly."
+                ]
+            },
+            rights: {
+                'Professional Deflection': [
+                    "Actually, our rights management team is conducting a comprehensive audit of all catalog assets.",
+                    "Actually, there's a chain-of-title issue that our legal department needs to resolve first.",
+                    "Actually, we're waiting for confirmation from the publishing administrator on split percentages.",
+                    "Actually, the rights database is being migrated to a new system.",
+                    "Actually, we need clearance from all co-writers before proceeding.",
+                    "Actually, international rights complications are delaying the process.",
+                    "Actually, we're resolving conflicts with prior agreements.",
+                    "Actually, the rights society is reviewing the registration.",
+                    "Actually, sample clearances are holding up the rights allocation.",
+                    "Actually, we're updating our rights management protocols.",
+                    "Actually, territorial restrictions are complicating the rights situation."
+                ],
+                'Direct Communication': [
+                    "Actually, these rights issues could have been avoided if the proper documentation was submitted initially.",
+                    "Actually, we find it concerning that you're only now questioning the rights allocation.",
+                    "Actually, as any professional knows, rights clearances take significant time when done properly.",
+                    "Actually, you should have read the contract before signing.",
+                    "Actually, these rights were clearly outlined in the agreement.",
+                    "Actually, we're not responsible for your lack of understanding about rights.",
+                    "Actually, hiring a better lawyer might have prevented this confusion.",
+                    "Actually, the rights situation is standard and you're overreacting.",
+                    "Actually, we own the rights per the contract you signed.",
+                    "Actually, disputing rights at this stage seems opportunistic.",
+                    "Actually, you waived these rights in your agreement."
+                ],
+                'Apologetic Response': [
+                    "Actually, we're so sorry about this rights mess and we know how frustrating the complexity must be.",
+                    "Actually, this is incredibly embarrassing for us and we feel awful about the confusion surrounding your rights.",
+                    "Actually, we're devastated by these complications and wish we could just wave a magic wand to fix everything.",
+                    "Actually, this rights nightmare is our fault and we're sick about it.",
+                    "Actually, we're heartbroken that legal complexities are affecting your ownership.",
+                    "Actually, this bureaucratic mess around your rights is crushing us.",
+                    "Actually, we feel terrible that you're questioning what you actually own.",
+                    "Actually, the rights confusion is inexcusable and we're ashamed.",
+                    "Actually, we're mortified by how poorly we've handled your rights.",
+                    "Actually, this rights disaster keeps us up at night.",
+                    "Actually, we're so sorry for the mess we've made of your catalog."
+                ]
+            },
+            advance: {
+                'Professional Deflection': [
+                    "Actually, all advance requests are under review by the finance committee which meets monthly.",
+                    "Actually, we're implementing new recoupment models that affect advance structures.",
+                    "Actually, the CFO has instituted a temporary freeze on advances while we assess our position.",
+                    "Actually, advance approvals require board authorization.",
+                    "Actually, we're revising our advance policies across the roster.",
+                    "Actually, cash flow projections are being updated before new advances.",
+                    "Actually, our banking relationships are being restructured.",
+                    "Actually, we're waiting for year-end financials before approving advances.",
+                    "Actually, advance requests are processed in order of submission.",
+                    "Actually, new regulatory requirements are affecting advance distributions.",
+                    "Actually, we're evaluating the ROI on all advance investments."
+                ],
+                'Direct Communication': [
+                    "Actually, considering your current unrecouped balance, this request seems premature.",
+                    "Actually, we've already provided advances well beyond industry standards for your sales level.",
+                    "Actually, if you review your statements, you'll see why additional advances aren't feasible.",
+                    "Actually, you haven't recouped your last three advances.",
+                    "Actually, advances are for artists who generate revenue.",
+                    "Actually, we're not a bank.",
+                    "Actually, maybe focus on earning royalties instead of asking for advances.",
+                    "Actually, your spending habits don't inspire confidence.",
+                    "Actually, we've already invested more than your catalog is worth.",
+                    "Actually, constantly asking for money isn't a good look.",
+                    "Actually, you need to earn money, not borrow it."
+                ],
+                'Apologetic Response': [
+                    "Actually, we're heartbroken that we can't provide the advance you need and we know this puts you in a difficult position.",
+                    "Actually, this is devastating for us because we want to support you financially but the numbers just don't work.",
+                    "Actually, we feel terrible saying no to this advance request when we know how much you're counting on it.",
+                    "Actually, denying this advance feels like betraying you.",
+                    "Actually, we're sick knowing you need this money and we can't help.",
+                    "Actually, this is crushing because we know this advance could change everything for you.",
+                    "Actually, we're devastated that financial constraints prevent us from supporting you.",
+                    "Actually, saying no to your advance request is breaking our hearts.",
+                    "Actually, we feel like monsters denying you financial support.",
+                    "Actually, we're so sorry for putting business before your wellbeing.",
+                    "Actually, this advance denial might ruin your career and it's destroying us."
+                ]
+            }
+        };
+
+        let generatedResponses = [];
+
+        document.getElementById('generateBtn').addEventListener('click', function() {
+            const scenario = document.getElementById('scenario').value;
+            if (!scenario) {
+                alert('Please select a response category.');
+                return;
+            }
+
+            this.innerHTML = '<span class="loading"></span> Processing...';
+            this.disabled = true;
+
+            setTimeout(() => {
+                const responses = responseDatabase[scenario];
+                const types = Object.keys(responses);
+                
+                generatedResponses = [];
+                const tbody = document.getElementById('resultsBody');
+                tbody.innerHTML = '';
+
+                types.forEach(type => {
+                    const responseList = responses[type];
+                    const randomResponse = responseList[Math.floor(Math.random() * responseList.length)];
+                    generatedResponses.push({ type, text: randomResponse });
+
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td class="response-type">${type}</td>
+                        <td class="response-text">${randomResponse}</td>
+                        <td>
+                            <a class="action-link" onclick="copyText('${randomResponse.replace(/'/g, "\\'")}')">Copy</a>
+                        </td>
+                    `;
+                    tbody.appendChild(row);
+                });
+
+                // Set timestamp
+                const now = new Date();
+                document.getElementById('timestamp').textContent = now.toLocaleString();
+
+                document.getElementById('results').classList.add('active');
+                
+                this.innerHTML = 'Generate Responses';
+                this.disabled = false;
+            }, 1200);
+        });
+
+        function copyText(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                // Show feedback on the clicked link
+                const link = event.target;
+                const originalText = link.textContent;
+                link.textContent = 'Copied';
+                link.style.color = 'green';
+                setTimeout(() => {
+                    link.textContent = originalText;
+                    link.style.color = '';
+                }, 2000);
+            });
+        }
+
+        function copyAll() {
+            let allText = 'GENERATED RESPONSES:\n\n';
+            generatedResponses.forEach(response => {
+                allText += `${response.type}:\n${response.text}\n\n`;
+            });
+            allText += '\n---\nGenerated by ResponseLogic™ Professional Communication Suite';
+            
+            navigator.clipboard.writeText(allText).then(() => {
+                // Show feedback on the button
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = '✓ Copied';
+                btn.style.background = 'green';
+                btn.style.color = 'white';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.background = '';
+                    btn.style.color = '';
+                }, 2000);
+            });
+        }
+
+        function clearForm() {
+            document.getElementById('scenario').value = '';
+            document.getElementById('results').classList.remove('active');
+            document.getElementById('resultsBody').innerHTML = '';
+            generatedResponses = [];
+        }
+
+        function generateNewSet() {
+            const scenario = document.getElementById('scenario').value;
+            if (!scenario) {
+                alert('Please select a response category first.');
+                return;
+            }
+            // Just trigger the generate button click to get new responses
+            document.getElementById('generateBtn').click();
+        }
+
+        function showCCModal() {
+            document.getElementById('ccModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('ccModal').classList.remove('active');
+        }
+
+        function confirmCC() {
+            document.getElementById('modalBody').innerHTML = '<p style="color: red; font-weight: bold;">Error: Too many recipients. Please reduce the CC list.</p>';
+            setTimeout(closeModal, 1500);
+        }
+
+        function addComplexity() {
+            const responses = document.querySelectorAll('.response-text');
+            if (responses.length === 0) {
+                alert('Please generate responses first.');
+                return;
+            }
+
+            const jargon = [
+                'leveraging synergistic methodologies',
+                'implementing blockchain protocols',
+                'utilizing AI-driven analytics',
+                'deploying cloud-based solutions'
+            ];
+
+            responses.forEach(response => {
+                const text = response.textContent;
+                const phrase = jargon[Math.floor(Math.random() * jargon.length)];
+                response.textContent = text.replace('Actually,', `Actually, while ${phrase},`);
+            });
+
+            alert('Technical language has been added to all responses.');
+        }
+    </script>
+</body>
+</html>
